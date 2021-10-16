@@ -7,7 +7,7 @@ import { Tracker } from 'meteor/tracker';
  */
 class EventCollection {
   constructor() {
-    this.name = 'VaccineCollection';
+    this.name = 'EventCollection';
     this.collection = new Mongo.Collection(this.name);
 
     this.schema = new SimpleSchema({

@@ -2,9 +2,6 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
-/**
- * The VaccineCollection. It encapsulates state and variable values for stuff.
- */
 class TagCollection {
   constructor() {
     this.name = 'TagCollection';

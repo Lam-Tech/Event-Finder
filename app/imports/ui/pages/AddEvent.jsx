@@ -19,13 +19,13 @@ const bridge = new SimpleSchema2Bridge(Event.schema);
 class AddEvent extends React.Component {
 
   submit(data) {
-    const { owner, ownerName, title, date, location, information, pHave, maxWant } = data;
-    Event.collection.insert({ owner, ownerName, title, date, location, information, pHave, maxWant },
+    const { title, date, location, information, pHave, maxWant } = data;
+    Event.collection.insert({ title, date, location, information, pHave, maxWant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Profile updated successfully', 'success');
+          swal('Success', 'Event Created successfully', 'success');
         }
       });
   }

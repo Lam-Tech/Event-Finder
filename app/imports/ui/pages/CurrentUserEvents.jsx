@@ -7,7 +7,7 @@ class Landing extends React.Component {
     return (
       <Grid columns={2} divided>
         <Grid.Row>
-          <Grid.Column c>
+          <Grid.Column>
             Joined Event
           </Grid.Column>
           <Grid.Column>
