@@ -9,7 +9,6 @@ class Landing extends React.Component {
       <Container textAlign='center' fluid>
         <Header as='h1'>Hello!</Header>
         <Header as='h2'>{Meteor.user().username}</Header>
-        <Header as='h2'>How are you feeling Today?</Header>
       </Container>
     );
   }
