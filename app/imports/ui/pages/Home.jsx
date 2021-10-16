@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Header, Container } from 'semantic-ui-react';
 
 /** A simple static component to render some text for the landing page. */
-class Landing extends React.Component {
+class Home extends React.Component {
   render() {
     return (
       <Container textAlign='center' fluid>
@@ -15,4 +15,4 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+export default Home;
