@@ -11,8 +11,8 @@ class EventCollection {
     this.collection = new Mongo.Collection(this.name);
 
     this.schema = new SimpleSchema({
-      owner: String,
-      ownerName: String,
+      // owner: String,
+      // ownerName: String,
       title: { label: 'Event', type: String },
       date: { label: 'Data', type: Date },
       location: { label: 'Address', type: String },

@@ -32,7 +32,6 @@ export const EventCard = (props) => (
 
 EventCard.propTypes = {
   event: PropTypes.shape({
-    ownerName: PropTypes.string,
     title: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,

@@ -3,19 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Loader, Card, Header, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
 import { EventCard } from '../components/EventsCard';
-import { NavLink } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Events extends React.Component {
-  constructor(props) {
-    super(props);
-    this.owner = Meteor.user().username;
-    this.state = {
-      prompt: false,
-    };
-  }
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
