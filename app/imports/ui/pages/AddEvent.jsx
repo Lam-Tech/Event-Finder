@@ -18,6 +18,10 @@ const bridge = new SimpleSchema2Bridge(Event.schema);
 
 /** A simple static component to render some text for the landing page. */
 class AddEvent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { redirectToReferer: false };
+  }
 
   submit(data) {
     const { owner, title, date, location, information, pHave, maxWant } = data;
@@ -27,12 +31,15 @@ class AddEvent extends React.Component {
           swal('Error', error.message, 'error');
         } else {
           swal('Success', 'Event Created successfully', 'success');
+          this.setState({ redirectToReferer: true });
         }
       });
-    <Redirect to='/events'/>;
   }
 
   render() {
+    if (this.state.redirectToReferer) {
+      return <Redirect to='/home'/>;
+    }
     return (
       <Container>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
