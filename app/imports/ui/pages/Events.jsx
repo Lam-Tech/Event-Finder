@@ -28,7 +28,7 @@ class Events extends React.Component {
           <Button as={NavLink} exact to="/addevents">Create Event</Button>
         </Container>
         <CardGroup>
-          {this.props.event.map((events) => <EventsCard key={events} vaccine={events} />)}
+          {this.props.event.map((events) => <EventsCard key={events} event={events} />)}
         </CardGroup>
       </Container>
     );

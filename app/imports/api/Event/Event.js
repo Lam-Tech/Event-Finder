@@ -11,7 +11,7 @@ class EventCollection {
     this.collection = new Mongo.Collection(this.name);
 
     this.schema = new SimpleSchema({
-      // owner: String,
+      owner: { label: 'owner', type: String },
       // ownerName: String,
       title: { label: 'Event', type: String },
       date: { label: 'Data', type: Date },
@@ -22,6 +22,7 @@ class EventCollection {
     }, { tracker: Tracker });
     this.collection.attachSchema(this.schema);
     this.userPublicationName = `${this.name}.publication.user`;
+    this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
 

@@ -8,24 +8,21 @@ import { Tag } from '../../api/Event/Tag';
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
 Meteor.publish(Stuffs.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Stuffs.collection.find({ owner: username });
+    return Stuffs.collection.find();
   }
   return this.ready();
 });
 
 Meteor.publish(Event.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Event.collection.find({ owner: username });
+    return Event.collection.find();
   }
   return this.ready();
 });
 
 Meteor.publish(Tag.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Tag.collection.find({ owner: username });
+    return Tag.collection.find();
   }
   return this.ready();
 });
