@@ -9,7 +9,7 @@ import {
   NumField,
   LongTextField,
   SubmitField,
-  TextField,
+  TextField, HiddenField,
 } from 'uniforms-semantic';
 import { Event } from '../../api/Event/Event';
 
@@ -19,8 +19,8 @@ const bridge = new SimpleSchema2Bridge(Event.schema);
 class AddEvent extends React.Component {
 
   submit(data) {
-    const { title, date, location, information, pHave, maxWant } = data;
-    Event.collection.insert({ title, date, location, information, pHave, maxWant },
+    const { owner, title, date, location, information, pHave, maxWant } = data;
+    Event.collection.insert({ owner, title, date, location, information, pHave, maxWant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -29,7 +29,6 @@ class AddEvent extends React.Component {
         }
       });
   }
-  // <HiddenField name="owner" value={this.owner}/>
 
   render() {
     return (
@@ -48,6 +47,7 @@ class AddEvent extends React.Component {
             </Form.Group>
             <SubmitField value='Create'/>
             <ErrorsField/>
+            <HiddenField name='owner' value={Meteor.user().username}/>
           </Segment>
         </AutoForm>
       </Container>

@@ -14,7 +14,7 @@ class EventsCard extends React.Component {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            }).format(this.props.event.date())}</span>
+            }).format(this.props.event.date)}</span>
           </Card.Meta>
           <Card.Description>
             <Header as='h5'>Location</Header>
@@ -36,6 +36,7 @@ class EventsCard extends React.Component {
 
 EventsCard.propTypes = {
   event: PropTypes.shape({
+    owner: PropTypes.string,
     title: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,
