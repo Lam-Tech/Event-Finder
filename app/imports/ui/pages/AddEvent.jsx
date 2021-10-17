@@ -11,6 +11,7 @@ import {
   SubmitField,
   TextField,
 } from 'uniforms-semantic';
+import { Redirect } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
 
 const bridge = new SimpleSchema2Bridge(Event.schema);
@@ -20,6 +21,7 @@ class AddEvent extends React.Component {
 
   submit(data) {
     const { title, date, location, information, pHave, maxWant } = data;
+    // if correct authentication, redirect to page instead of login screen
     Event.collection.insert({ title, date, location, information, pHave, maxWant },
       (error) => {
         if (error) {
@@ -28,6 +30,7 @@ class AddEvent extends React.Component {
           swal('Success', 'Event Created successfully', 'success');
         }
       });
+    <Redirect to='/events'/>;
   }
   // <HiddenField name="owner" value={this.owner}/>
 
