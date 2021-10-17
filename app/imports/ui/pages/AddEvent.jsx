@@ -11,6 +11,7 @@ import {
   SubmitField,
   TextField, HiddenField,
 } from 'uniforms-semantic';
+import { Redirect } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
 
 const bridge = new SimpleSchema2Bridge(Event.schema);
@@ -28,6 +29,7 @@ class AddEvent extends React.Component {
           swal('Success', 'Event Created successfully', 'success');
         }
       });
+    <Redirect to='/events'/>;
   }
 
   render() {
