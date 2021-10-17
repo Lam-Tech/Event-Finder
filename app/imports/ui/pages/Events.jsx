@@ -27,6 +27,7 @@ class Events extends React.Component {
           <Header as="h1" textAlign="center">Events</Header>
           <Button as={NavLink} exact to="/addevents">Create Event</Button>
         </Container>
+        <br/>
         <CardGroup>
           {this.props.event.map((events) => <EventsCard key={events} event={events} />)}
         </CardGroup>
