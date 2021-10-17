@@ -9,9 +9,8 @@ class Landing extends React.Component {
       <Container textAlign='center' fluid className='landing'>
         <Header as='h1'>Event Finder</Header>
         <p>Join / Create Event</p>
-        <Button.Group size='huge'>
+        <Button.Group size='medium'>
           <Button as={NavLink} exact to="/signup" inverted color='green'>Sign Up</Button>
-          <Button.Or/>
           <Button as={NavLink} exact to="/signin" inverted color='red'>Sign In</Button>
         </Button.Group>
       </Container>

@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import Home from '../pages/Home';
 import Events from '../pages/Events';
+import AddEvent from '../pages/AddEvent';
 import CurrentUserEvents from '../pages/CurrentUserEvents';
 import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route exact path="/" component={Landing}/>
             <ProtectedRoute path="/home" component={Home}/>
             <ProtectedRoute path="/events" component={Events}/>
+            <ProtectedRoute path="/addevents" component={AddEvent}/>
             <ProtectedRoute path="/currentuserevents" component={CurrentUserEvents}/>
             <ProtectedRoute path="/profile" component={Profile}/>
             <Route path="/signin" component={Signin}/>

@@ -1,24 +1,51 @@
 import React from 'react';
-import { Grid, Image } from 'semantic-ui-react';
+import { Meteor } from 'meteor/meteor';
+import { Container, Loader, Card, Header, Button, CardGroup } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Event } from '../../api/Event/Event';
+import EventsCard from '../components/EventsCard';
 
 /** A simple static component to render some text for the landing page. */
-class Landing extends React.Component {
+class Events extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      prompt: false,
+    };
+  }
+
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
-      <Grid id='landing-page' verticalAlign='middle' textAlign='center' container>
-
-        <Grid.Column width={4}>
-          <Image size='small' circular src="/images/meteor-logo.png"/>
-        </Grid.Column>
-
-        <Grid.Column width={8}>
-          <h1>Welcome to this template</h1>
-          <p>Now get to work and modify this app!</p>
-        </Grid.Column>
-
-      </Grid>
+      <Container>
+        <Container fluid textAlign='center'>
+          <Header as="h1" textAlign="center">Events</Header>
+          <Button as={NavLink} exact to="/addevents">Create Event</Button>
+        </Container>
+        <CardGroup>
+          {this.props.event.map((events) => <EventsCard key={events} vaccine={events} />)}
+        </CardGroup>
+      </Container>
     );
   }
 }
 
-export default Landing;
+Events.propTypes = {
+  event: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const subscription = Meteor.subscribe(Event.userPublicationName);
+  const ready = subscription.ready();
+  const event = Event.collection.find({}).fetch();
+  return {
+    event,
+    ready,
+  };
+})(Events);
