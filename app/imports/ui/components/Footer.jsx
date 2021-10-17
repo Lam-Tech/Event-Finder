@@ -11,7 +11,7 @@ class Footer extends React.Component {
     return (
       <Menu secondary borderless fluid widths={3} className='footer'>
         {this.props.currentUser ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/events" key='event'><Icon size='large' name='pencil alternate' color='teal'/>Events</Menu.Item>,
+          [<Menu.Item as={NavLink} activeClassName="active" exact to="/events" key='events'><Icon size='large' name='pencil alternate' color='teal'/>Events</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/currentuserevents" key='currentuserevents'><Icon size='large' name='calendar alternate' color='teal'/>My Events</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/profile" key='profile'><Icon size='large' name='address book outline' color='teal'/>Profile</Menu.Item>]
         ) : ''}
