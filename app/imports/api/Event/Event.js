@@ -24,7 +24,7 @@ class EventCollection {
       },
       date: { label: 'Data', type: Date },
       location: { label: 'Address', type: String },
-      information: { label: 'Information', type: String },
+      information: { label: 'Information', type: String, optional: true },
       pHave: { label: 'PeopleIn', type: Number },
       maxWant: { label: 'MaxPeopleWant', type: Number },
     }, { tracker: Tracker });

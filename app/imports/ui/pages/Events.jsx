@@ -31,7 +31,7 @@ class Events extends React.Component {
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Button as={NavLink} exact to="/addevents">Create Event</Button>
+          <Button as={NavLink} exact to="/addevents" color='Yellow'>Create Event</Button>
         </Container>
         <br/>
         <CardGroup>

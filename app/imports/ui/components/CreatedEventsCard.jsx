@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 class CreatedEventsCard extends React.Component {
   render() {
     return (
-      <Card>
+      <Card color='red'>
         <Card.Content>
           <Card.Header>{this.props.event.title}</Card.Header>
           <Card.Meta>
@@ -15,22 +15,18 @@ class CreatedEventsCard extends React.Component {
               month: 'long',
               day: 'numeric',
             }).format(this.props.event.date)}</span>
+            <span>{this.props.event.statusType}</span>
           </Card.Meta>
           <Card.Description>
             <Header as='h5'>Location</Header>
             {this.props.event.location}
+            <Header as='h5'>Info</Header>
+            {this.props.event.information}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Header as='h5'>Info</Header>
-          {this.props.event.information}
-        </Card.Content>
-        <Card.Content extra>
-          {this.props.event.statusType}
-        </Card.Content>
-        <Card.Content extra>
-          <Header as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}</Header>
-          <Link to={'/editevents'}>Edit</Link>
+          <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
+            <Link className='editButton' to={'/editevents'}>Edit</Link></Header>
         </Card.Content>
       </Card>
     );
