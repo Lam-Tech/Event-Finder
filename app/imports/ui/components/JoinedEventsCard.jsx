@@ -27,7 +27,7 @@ class JoinedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header as='h5'>{this.props.event.pHave}/{this.props.event.maxWant}</Header>
-          <Button>Edit</Button>
+          <Button>OptOut</Button>
         </Card.Content>
       </Card>
     );

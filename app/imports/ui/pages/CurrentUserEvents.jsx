@@ -6,7 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Event } from '../../api/Event/Event';
 import CreatedEventsCard from '../components/CreatedEventsCard';
 
-//const username = Meteor.users.findOne(this.userId).username;
+// const username = Meteor.users.findOne(this.userId).username;
 /** A simple static component to render some text for the landing page. */
 class CurrentUserEvents extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class CurrentUserEvents extends React.Component {
       <Container>
         <Header>Created Events</Header>
         <CardGroup>
-          {this.props.event.map((events) => <CreatedEventsCard key={events} event={events} />)}
+          {this.props.event.map((events) => <CreatedEventsCard key={events.owner} event={events} />)}
         </CardGroup>
       </Container>
     );

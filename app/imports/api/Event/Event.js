@@ -13,7 +13,7 @@ class EventCollection {
     this.schema = new SimpleSchema({
       owner: { label: 'owner', type: String },
       // ownerName: String,
-      member: { label: 'creator', type: String },
+      // member: { label: 'member', type: String },
       title: { label: 'Event', type: String },
       date: { label: 'Data', type: Date },
       location: { label: 'Address', type: String },

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, Header, Button } from 'semantic-ui-react';
+import { Card, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class CreatedEventsCard extends React.Component {
   render() {
@@ -27,7 +27,7 @@ class CreatedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header as='h5'>{this.props.event.pHave}/{this.props.event.maxWant}</Header>
-          <Button>Edit</Button>
+          <Link to={`/editevents`}>Edit</Link>
         </Card.Content>
       </Card>
     );

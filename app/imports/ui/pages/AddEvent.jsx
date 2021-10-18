@@ -38,7 +38,7 @@ class AddEvent extends React.Component {
 
   render() {
     if (this.state.redirectToReferer) {
-      return <Redirect to='/home'/>;
+      return <Redirect to='/events'/>;
     }
     return (
       <Container>
