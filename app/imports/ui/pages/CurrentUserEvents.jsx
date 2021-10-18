@@ -21,11 +21,12 @@ class CurrentUserEvents extends React.Component {
   }
 
   renderPage() {
+    const ownEvents = this.props.event.filter(events => (events.owner) === Meteor.user().username);
     return (
       <Container>
         <Header>Created Events</Header>
         <CardGroup>
-          {this.props.event.map((events) => <CreatedEventsCard key={events.owner} event={events} />)}
+          {ownEvents.map((events) => <CreatedEventsCard key={events} event={events} />)}
         </CardGroup>
       </Container>
     );
