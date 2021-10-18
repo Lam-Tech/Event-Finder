@@ -26,7 +26,10 @@ class CreatedEventsCard extends React.Component {
           {this.props.event.information}
         </Card.Content>
         <Card.Content extra>
-          <Header as='h5'>{this.props.event.pHave}/{this.props.event.maxWant}</Header>
+          {this.props.event.statusType}
+        </Card.Content>
+        <Card.Content extra>
+          <Header as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}</Header>
           <Link to={'/editevents'}>Edit</Link>
         </Card.Content>
       </Card>
@@ -43,6 +46,7 @@ CreatedEventsCard.propTypes = {
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,
     information: PropTypes.string,
+    statusType: PropTypes.string,
     pHave: PropTypes.number,
     maxWant: PropTypes.number,
   }).isRequired,

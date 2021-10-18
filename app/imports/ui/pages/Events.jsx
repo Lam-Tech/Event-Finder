@@ -26,6 +26,7 @@ class Events extends React.Component {
     let ownEvents = this.props.event;
     ownEvents = _.reject(ownEvents, function (events) { return events.owner === currentUser; });
     ownEvents = _.reject(ownEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
+    ownEvents = _.reject(ownEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
     return (
       <Container>
         <Container fluid textAlign='center'>

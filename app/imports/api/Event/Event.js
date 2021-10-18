@@ -18,6 +18,10 @@ class EventCollection {
         type: String,
       },
       title: { label: 'Event', type: String },
+      statusType: {
+        type: String,
+        allowedValues: ['Online', 'Offline'],
+      },
       date: { label: 'Data', type: Date },
       location: { label: 'Address', type: String },
       information: { label: 'Information', type: String },

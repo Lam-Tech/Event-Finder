@@ -10,6 +10,7 @@ import {
   LongTextField,
   SubmitField,
   TextField, HiddenField,
+  SelectField,
 } from 'uniforms-semantic';
 import { Redirect } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
@@ -24,8 +25,8 @@ class AddEvent extends React.Component {
   }
 
   submit(data) {
-    const { owner, members, title, date, location, information, pHave, maxWant } = data;
-    Event.collection.insert({ owner, members, title, date, location, information, pHave, maxWant },
+    const { owner, members, title, date, location, information, statusType, pHave, maxWant } = data;
+    Event.collection.insert({ owner, members, title, date, location, information, statusType, pHave, maxWant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -51,8 +52,9 @@ class AddEvent extends React.Component {
             </Form.Group>
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
-              <NumField name='pHave' decimal={false} placeholder='# People it have' label='# People'/>
-              <NumField name='maxWant' decimal={false} placeholder='Max People Needed' label='People Needed'/>
+              <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
+              <NumField name='pHave' decimal={false} placeholder='Amount of People Already Have' label='People Already Have'/>
+              <NumField name='maxWant' decimal={false} placeholder='Amount of People Needed' label='People Needed'/>
             </Form.Group>
             <SubmitField value='Create'/>
             <ErrorsField/>

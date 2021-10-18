@@ -6,7 +6,7 @@ import {
   DateField,
   ErrorsField,
   HiddenField, LongTextField,
-  NumField,
+  NumField, SelectField,
   SubmitField,
   TextField,
 } from 'uniforms-semantic';
@@ -56,6 +56,7 @@ class EditEvent extends React.Component {
             </Form.Group>
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
+              <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
               <NumField name='pHave' decimal={false} placeholder='# People it have' label='# People'/>
               <NumField name='maxWant' decimal={false} placeholder='Max People Needed' label='People Needed'/>
             </Form.Group>

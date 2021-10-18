@@ -43,7 +43,10 @@ class EventsCard extends React.Component {
           {this.props.event.information}
         </Card.Content>
         <Card.Content extra>
-          <Header as='h5'>{this.props.event.pHave}/{this.props.event.maxWant}</Header>
+          {this.props.event.statusType}
+        </Card.Content>
+        <Card.Content extra>
+          <Header as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}</Header>
           <Button onClick={this.handleClick}>Join</Button>
         </Card.Content>
       </Card>
@@ -60,6 +63,7 @@ EventsCard.propTypes = {
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,
     information: PropTypes.string,
+    statusType: PropTypes.string,
     pHave: PropTypes.number,
     maxWant: PropTypes.number,
   }).isRequired,
