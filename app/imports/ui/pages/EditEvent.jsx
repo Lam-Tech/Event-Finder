@@ -14,12 +14,17 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Redirect } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
 
 const bridge = new SimpleSchema2Bridge(Event.schema);
 
 /** Renders the Page for editing a single document. */
 class EditEvent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { redirectToReferer: false };
+  }
 
   // On successful submit, insert the data.
   submit(data) {
@@ -28,6 +33,7 @@ class EditEvent extends React.Component {
     Event.collection.update(_id, { $set: { owner, title, date, location, information, pHave, maxWant } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Event updated successfully', 'success')));
+    this.setState({ redirectToReferer: true });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -36,12 +42,15 @@ class EditEvent extends React.Component {
   }
 
   renderPage() {
+    if (this.state.redirectToReferer) {
+      return <Redirect to='/currentuserevents'/>;
+    }
     return (
       <Container>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <Segment>
             <Form.Group widths={'equal'}>
-              <TextField name='title' placeholder='Basketball' label='Event Title'/>
+              <TextField name='title' placeholder='Basketball' label='Event Title' />
               <DateField name='date' placeholder='MM/DD/YYYY' label='Date'/>
               <TextField name='location' placeholder='Address' label='Location'/>
             </Form.Group>
