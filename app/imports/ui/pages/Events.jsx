@@ -29,7 +29,7 @@ class Events extends React.Component {
         </Container>
         <br/>
         <CardGroup>
-          {this.props.event.map((events) => <EventsCard key={events} event={events} />)}
+          {this.props.event.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
       </Container>
     );

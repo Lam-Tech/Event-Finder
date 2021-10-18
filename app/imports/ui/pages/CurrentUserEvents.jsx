@@ -26,7 +26,7 @@ class CurrentUserEvents extends React.Component {
       <Container>
         <Header>Created Events</Header>
         <CardGroup>
-          {ownEvents.map((events) => <CreatedEventsCard key={events} event={events} />)}
+          {ownEvents.map((events) => <CreatedEventsCard key={events._id} event={events} />)}
         </CardGroup>
       </Container>
     );
@@ -40,7 +40,7 @@ CurrentUserEvents.propTypes = {
 
 export default withTracker(() => {
   const subscription = Meteor.subscribe(Event.userPublicationName);
-  const event = Event.collection.find({ owner: 'john@foo.com' }).fetch();
+  const event = Event.collection.find({}).fetch();
   const ready = subscription.ready();
   return {
     event,

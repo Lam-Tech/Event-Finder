@@ -24,8 +24,8 @@ class AddEvent extends React.Component {
   }
 
   submit(data) {
-    const { owner, title, date, location, information, pHave, maxWant } = data;
-    Event.collection.insert({ owner, title, date, location, information, pHave, maxWant },
+    const { owner, members, title, date, location, information, pHave, maxWant } = data;
+    Event.collection.insert({ owner, members, title, date, location, information, pHave, maxWant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -57,6 +57,7 @@ class AddEvent extends React.Component {
             <SubmitField value='Create'/>
             <ErrorsField/>
             <HiddenField name='owner' value={Meteor.user().username}/>
+            <HiddenField name='members' value={[Meteor.user().username]}/>
           </Segment>
         </AutoForm>
       </Container>
