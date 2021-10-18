@@ -4,6 +4,7 @@ import { Container, Loader, Header, Button, CardGroup } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import { Event } from '../../api/Event/Event';
 import EventsCard from '../components/EventsCard';
 
@@ -21,6 +22,10 @@ class Events extends React.Component {
   }
 
   renderPage() {
+    const currentUser = Meteor.user().username;
+    let ownEvents = this.props.event;
+    ownEvents = _.reject(ownEvents, function (events) { return events.owner === currentUser; });
+    ownEvents = _.reject(ownEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
     return (
       <Container>
         <Container fluid textAlign='center'>
@@ -29,7 +34,7 @@ class Events extends React.Component {
         </Container>
         <br/>
         <CardGroup>
-          {this.props.event.map((events) => <EventsCard key={events._id} event={events} />)}
+          {ownEvents.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
       </Container>
     );

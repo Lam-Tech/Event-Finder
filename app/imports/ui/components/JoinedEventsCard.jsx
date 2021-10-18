@@ -3,8 +3,8 @@ import { Card, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
-import { Event } from '../../api/Event/Event';
 import swal from 'sweetalert';
+import { Event } from '../../api/Event/Event';
 
 class JoinedEventsCard extends React.Component {
   constructor(props) {
