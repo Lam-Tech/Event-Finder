@@ -16,7 +16,7 @@ class EventsCard extends React.Component {
   handleClick() {
     const _id = this.props.event._id;
     const members = Meteor.user().username;
-    Event.collection.update(_id, { $push: { members } }, (error) => (error ?
+    Event.collection.update(_id, { $addToSet: { members } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Joined event successfully', 'success')));
   }

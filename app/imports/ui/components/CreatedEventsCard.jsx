@@ -36,7 +36,9 @@ class CreatedEventsCard extends React.Component {
 
 CreatedEventsCard.propTypes = {
   event: PropTypes.shape({
+    _id: PropTypes.string,
     owner: PropTypes.string,
+    members: PropTypes.array,
     title: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,

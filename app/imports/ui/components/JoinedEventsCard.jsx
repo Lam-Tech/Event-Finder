@@ -1,9 +1,26 @@
 import React from 'react';
 import { Card, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
+import { Event } from '../../api/Event/Event';
+import swal from 'sweetalert';
 
 class JoinedEventsCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const _id = this.props.event._id;
+    const members = Meteor.user().username;
+    Event.collection.update(_id, { $pull: { members } }, (error) => (error ?
+      swal('Error', error.message, 'error') :
+      swal('Success', 'Opt-out event successfully', 'success')));
+  }
+
   render() {
     return (
       <Card>
@@ -27,7 +44,7 @@ class JoinedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header as='h5'>{this.props.event.pHave}/{this.props.event.maxWant}</Header>
-          <Button>OptOut</Button>
+          <Button onClick={this.handleClick}>Opt-Out</Button>
         </Card.Content>
       </Card>
     );
@@ -36,7 +53,9 @@ class JoinedEventsCard extends React.Component {
 
 JoinedEventsCard.propTypes = {
   event: PropTypes.shape({
+    _id: PropTypes.string,
     owner: PropTypes.string,
+    members: PropTypes.array,
     title: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,
