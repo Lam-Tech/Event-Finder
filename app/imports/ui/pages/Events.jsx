@@ -5,13 +5,10 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { AutoForm, SubmitField } from 'uniforms-semantic';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Tag } from '../../api/Event/Tag';
+import { Event } from '../../api/Event/Event';
 import EventsCard from '../components/EventsCard';
 
 /** A simple static component to render some text for the landing page. */
-const bridge = new SimpleSchema2Bridge(Tag.schema);
 class Events extends React.Component {
   constructor(props) {
     super(props);
@@ -41,12 +38,6 @@ class Events extends React.Component {
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
-            <input name='tag' label='Tags' placeholder={'Tag'}/>
-            <span></span>
-            <SubmitField value='Search'/>
-          </AutoForm>
-          <br/>
           <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
           <Button toggle active={active} onClick={this.handleClick}>
             Online
@@ -68,9 +59,9 @@ Events.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(Tag.userPublicationName);
+  const subscription = Meteor.subscribe(Event.userPublicationName);
   const ready = subscription.ready();
-  const event = Tag.collection.find({}).fetch();
+  const event = Event.collection.find({}).fetch();
   return {
     event,
     ready,
