@@ -1,13 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, CardGroup, Header, Button } from 'semantic-ui-react';
+import { Container, Loader, CardGroup, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { _ } from 'meteor/underscore';
+import { NavLink } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
 import CreatedEventsCard from '../components/CreatedEventsCard';
-import JoinedEventsCard from '../components/JoinedEventsCard';
-import { NavLink } from 'react-router-dom';
 
 // const username = Meteor.users.findOne(this.userId).username;
 /** A simple static component to render some text for the landing page. */
