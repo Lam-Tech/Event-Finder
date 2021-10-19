@@ -50,7 +50,7 @@ class EditEvent extends React.Component {
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
           <Segment>
             <Form.Group widths={'equal'}>
-              <TextField name='title' placeholder='Basketball' label='Event Title' />
+              <TextField name='title' placeholder='Basketball' label='Event Title'/>
               <DateField name='date' placeholder='MM/DD/YYYY' label='Date'/>
               <TextField name='location' placeholder='Address' label='Location'/>
             </Form.Group>
@@ -58,7 +58,7 @@ class EditEvent extends React.Component {
             <Form.Group widths='equal'>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
               <NumField name='pHave' decimal={false} placeholder='# People it have' label='# People'/>
-              <NumField name='maxWant' decimal={false} placeholder='Max People Needed' label='People Needed'/>
+              <NumField name='maxWant' decimal={false} placeholder='People Needed' label='People Needed'/>
             </Form.Group>
             <SubmitField value='Update'/>
             <ErrorsField/>

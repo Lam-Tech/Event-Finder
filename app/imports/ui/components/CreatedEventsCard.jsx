@@ -24,7 +24,7 @@ class CreatedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
-            <Link className='editButton' to={'/editevents'}>Edit</Link></Header>
+            <Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link></Header>
         </Card.Content>
       </Card>
     );
