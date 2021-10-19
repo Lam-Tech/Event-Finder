@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Segment, Form } from 'semantic-ui-react';
+import { Container, Segment, Form, Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -13,6 +13,8 @@ import {
   SelectField,
 } from 'uniforms-semantic';
 import { Redirect } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import { Event } from '../../api/Event/Event';
 
 const bridge = new SimpleSchema2Bridge(Event.schema);
@@ -38,6 +40,10 @@ class AddEvent extends React.Component {
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     if (this.state.redirectToReferer) {
       return <Redirect to='/events'/>;
     }
@@ -68,4 +74,14 @@ class AddEvent extends React.Component {
   }
 }
 
-export default AddEvent;
+AddEvent.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const subscription = Meteor.subscribe(Event.userPublicationName);
+  const ready = subscription.ready();
+  return {
+    ready,
+  };
+})(AddEvent);
