@@ -1,9 +1,15 @@
 import React from 'react';
-import { Card, Header } from 'semantic-ui-react';
+import { Card, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
+import { Event } from '../../api/Event/Event';
 
 class CreatedEventsCard extends React.Component {
+
+  handleClick(id) {
+    Event.collection.remove(id);
+  }
+
   render() {
     return (
       <Card color='red'>
@@ -27,6 +33,7 @@ class CreatedEventsCard extends React.Component {
         <Card.Content extra>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
             <Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link></Header>
+          <Button floated='right' size='tiny' basic color='red' onClick={() => this.handleClick(this.props.event._id)}>Remove</Button>
         </Card.Content>
       </Card>
     );
