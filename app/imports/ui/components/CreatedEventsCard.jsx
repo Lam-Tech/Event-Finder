@@ -1,10 +1,16 @@
 import React from 'react';
-import { Card, Header, Label } from 'semantic-ui-react';
+import { Card, Header, Label, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Link, withRouter } from 'react-router-dom';
+import { Event } from '../../api/Event/Event';
 
 class CreatedEventsCard extends React.Component {
+
+  handleClick(id) {
+    Event.collection.remove(id);
+  }
+
   render() {
     return (
       <Card color='red'>
@@ -21,12 +27,14 @@ class CreatedEventsCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Header as='h5'>Tags{_.map(this.props.event.members,
+          <Header as='h5'>Tags{_.map(this.props.event.tag,
             (event, index) => <Label key={index} size='tiny' color='black'>{event}</Label>)}</Header>
         </Card.Content>
         <Card.Content extra>
-          <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
-            <span className='statues'>{this.props.event.statusType}</span><Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link></Header>
+          <span className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
+            {/* eslint-disable-next-line max-len */}
+            <span className='statues'>{this.props.event.statusType}</span>
+            <Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link><Icon className='trashCan' size='small' color='red' onClick={() => this.handleClick(this.props.event._id)} name='trash'/></span>
         </Card.Content>
       </Card>
     );

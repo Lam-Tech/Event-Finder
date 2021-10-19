@@ -5,16 +5,23 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { Event } from '../../api/Event/Event';
+import { AutoForm, SubmitField } from 'uniforms-semantic';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Tag } from '../../api/Event/Tag';
 import EventsCard from '../components/EventsCard';
 
 /** A simple static component to render some text for the landing page. */
+const bridge = new SimpleSchema2Bridge(Tag.schema);
 class Events extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       prompt: false,
     };
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  submit(data) {
   }
 
   handleClick = () => this.setState((prevState) => ({ active: !prevState.active }))
@@ -34,7 +41,13 @@ class Events extends React.Component {
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Button as={NavLink} exact to="/addevents" color='Yellow'>Create Event</Button>
+          <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
+            <input name='tag' label='Tags' placeholder={'Tag'}/>
+            <span></span>
+            <SubmitField value='Search'/>
+          </AutoForm>
+          <br/>
+          <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
           <Button toggle active={active} onClick={this.handleClick}>
             Online
           </Button>
@@ -43,6 +56,7 @@ class Events extends React.Component {
         <CardGroup>
           {ownEvents.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
+        <br/><br/><br/><br/>
       </Container>
     );
   }
@@ -54,9 +68,9 @@ Events.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(Event.userPublicationName);
+  const subscription = Meteor.subscribe(Tag.userPublicationName);
   const ready = subscription.ready();
-  const event = Event.collection.find({}).fetch();
+  const event = Tag.collection.find({}).fetch();
   return {
     event,
     ready,

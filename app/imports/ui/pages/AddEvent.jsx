@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Segment, Form } from 'semantic-ui-react';
+import { Container, Segment, Form, Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
+import { withTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import {
   AutoForm, DateField,
@@ -9,10 +10,12 @@ import {
   NumField,
   LongTextField,
   SubmitField,
+  AutoField,
   TextField, HiddenField,
   SelectField,
 } from 'uniforms-semantic';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Event } from '../../api/Event/Event';
 
 const bridge = new SimpleSchema2Bridge(Event.schema);
@@ -38,6 +41,10 @@ class AddEvent extends React.Component {
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     if (this.state.redirectToReferer) {
       return <Redirect to='/events'/>;
     }
@@ -52,8 +59,8 @@ class AddEvent extends React.Component {
             </Form.Group>
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
+              <AutoField name='tag'/>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
-              <TextField name='tag' label='Tags' showInlineError={true} placeholder={'Tag'}/>
               <NumField name='pHave' decimal={false} placeholder='Amount of People Already Have' label='People Already Have'/>
               <NumField name='maxWant' decimal={false} placeholder='Amount of People Needed' label='People Needed'/>
             </Form.Group>
@@ -68,4 +75,14 @@ class AddEvent extends React.Component {
   }
 }
 
-export default AddEvent;
+AddEvent.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const subscription = Meteor.subscribe(Event.userPublicationName);
+  const ready = subscription.ready();
+  return {
+    ready,
+  };
+})(AddEvent);

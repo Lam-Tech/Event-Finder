@@ -8,6 +8,7 @@ class Landing extends React.Component {
     return (
       <Container textAlign='center'>
         <Button size={'big'} as={NavLink} activeClassName="" exact to="/signout" color='red' inverted>Sign Out</Button>
+        <br/><br/><br/><br/>
       </Container>
     );
   }

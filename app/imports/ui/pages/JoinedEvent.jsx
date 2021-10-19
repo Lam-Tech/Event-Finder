@@ -3,13 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Loader, CardGroup, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import { NavLink } from 'react-router-dom';
 import { Event } from '../../api/Event/Event';
-import CreatedEventsCard from '../components/CreatedEventsCard';
+import JoinedEventsCard from '../components/JoinedEventsCard';
 
 // const username = Meteor.users.findOne(this.userId).username;
 /** A simple static component to render some text for the landing page. */
-class CurrentUserEvents extends React.Component {
+class JoinedEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,14 +24,15 @@ class CurrentUserEvents extends React.Component {
 
   renderPage() {
     const currentUser = Meteor.user().username;
-    const ownEvents = this.props.event.filter(events => (events.owner) === currentUser);
+    let joinedEvents = this.props.event.filter(events => _.find(events.members, function (member) { return member === currentUser; }));
+    joinedEvents = _.reject(joinedEvents, function (events) { return events.owner === currentUser; });
     return (
       <div>
-        <Container className='pageStyle'>
+        <Container>
           <Button as={NavLink} exact to="/currentuserevents" >Created Events</Button><Button as={NavLink} exact to="/joinedevents">Joined Events</Button>
           <br/><br/>
           <CardGroup>
-            {ownEvents.map((events) => <CreatedEventsCard key={events._id} event={events} />)}
+            {joinedEvents.map((events) => <JoinedEventsCard key={events._id} event={events} />)}
           </CardGroup>
           <br/><br/><br/><br/>
         </Container>
@@ -39,7 +41,7 @@ class CurrentUserEvents extends React.Component {
   }
 }
 
-CurrentUserEvents.propTypes = {
+JoinedEvent.propTypes = {
   event: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -52,4 +54,4 @@ export default withTracker(() => {
     event,
     ready,
   };
-})(CurrentUserEvents);
+})(JoinedEvent);
