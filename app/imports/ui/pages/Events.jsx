@@ -34,7 +34,7 @@ class Events extends React.Component {
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Button as={NavLink} exact to="/addevents" color='Yellow'>Create Event</Button>
+          <Button as={NavLink} exact to="/addevents" color='yellow'>Create Event</Button>
           <Button toggle active={active} onClick={this.handleClick}>
             Online
           </Button>
