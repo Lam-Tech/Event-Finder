@@ -28,9 +28,7 @@ class EventsCard extends React.Component {
           <Card.Header>{this.props.event.title}</Card.Header>
           <Card.Meta>
             <span className='date'>{new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
+              dateStyle: 'full', timeStyle: 'long',
             }).format(this.props.event.date)}</span>
             <span>{this.props.event.statusType}</span>
           </Card.Meta>
