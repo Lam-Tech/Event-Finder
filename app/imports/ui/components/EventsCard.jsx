@@ -38,8 +38,12 @@ class EventsCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Header as='h5'>Tags{_.map(this.props.event.members,
-            (event, index) => <Label key={index} size='tiny' color='black'>{event}</Label>)}</Header>
+          <Header as='h5'>Tags{_.map(this.props.event.tag,
+            (tag, index) => <Label key={index} size='tiny' color='black'>{tag}</Label>)}</Header>
+        </Card.Content>
+        <Card.Content extra>
+          <Header as='h5'>Members{_.map(this.props.event.members,
+            (member, index) => <Label key={index} size='tiny' color='black'>{member}</Label>)}</Header>
         </Card.Content>
         <Card.Content extra>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
@@ -56,6 +60,7 @@ EventsCard.propTypes = {
     owner: PropTypes.string,
     members: PropTypes.array,
     title: PropTypes.string,
+    tag: PropTypes.array,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,
     information: PropTypes.string,

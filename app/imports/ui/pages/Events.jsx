@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Header, Button, CardGroup } from 'semantic-ui-react';
+import { Container, Loader, Header, Button, CardGroup, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -14,11 +14,12 @@ class Events extends React.Component {
     super(props);
     this.state = {
       prompt: false,
+      search: '',
     };
   }
 
-  // eslint-disable-next-line no-unused-vars
-  submit(data) {
+  onchange = e => {
+    this.setState({ search: e.target.value });
   }
 
   handleClick = () => this.setState((prevState) => ({ active: !prevState.active }))
@@ -29,15 +30,18 @@ class Events extends React.Component {
 
   renderPage() {
     const { active } = this.state;
+    const { search } = this.state;
     const currentUser = Meteor.user().username;
-    let ownEvents = this.props.event;
-    ownEvents = _.reject(ownEvents, function (events) { return events.owner === currentUser; });
-    ownEvents = _.reject(ownEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
-    ownEvents = _.reject(ownEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
+    let otherEvents = this.props.event;
+    otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; });
+    otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
+    otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
+    const foundEvents = _.filter(otherEvents, function (events) { return _.find(events.tag, function (tag) { return tag.toLowerCase().indexOf(search.toLowerCase()) !== -1; }); });
     return (
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
+          <Input icon="search" placeholder="Search events by tag..." onChange={this.onchange}/>
           <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
           <Button toggle active={active} onClick={this.handleClick}>
             Online
@@ -45,7 +49,7 @@ class Events extends React.Component {
         </Container>
         <br/>
         <CardGroup>
-          {ownEvents.map((events) => <EventsCard key={events._id} event={events} />)}
+          {foundEvents.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
         <br/><br/><br/><br/>
       </Container>
