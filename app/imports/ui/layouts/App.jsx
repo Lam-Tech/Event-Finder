@@ -12,6 +12,7 @@ import Events from '../pages/Events';
 import AddEvent from '../pages/AddEvent';
 import EditEvent from '../pages/EditEvent';
 import CurrentUserEvents from '../pages/CurrentUserEvents';
+import JoinedEvent from '../pages/JoinedEvent';
 import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -32,6 +33,7 @@ class App extends React.Component {
             <ProtectedRoute path="/addevents" component={AddEvent}/>
             <ProtectedRoute path="/editevents" component={EditEvent}/>
             <ProtectedRoute path="/currentuserevents" component={CurrentUserEvents}/>
+            <ProtectedRoute path="/joinedevents" component={JoinedEvent}/>
             <ProtectedRoute path="/profile" component={Profile}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>

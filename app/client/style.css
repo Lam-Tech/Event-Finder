@@ -25,3 +25,12 @@
   position:absolute;
   left:150px;
 }
+
+.pageStyle {
+}
+
+.trashCan {
+  position:absolute;
+  left:265px;
+  bottom: 14px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Segment, Form } from 'semantic-ui-react';
+import { Container, Segment, Form, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -9,6 +9,7 @@ import {
   NumField,
   LongTextField,
   SubmitField,
+  AutoField,
   TextField, HiddenField,
   SelectField,
 } from 'uniforms-semantic';
@@ -52,8 +53,8 @@ class AddEvent extends React.Component {
             </Form.Group>
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
+              <AutoField name='tag'/>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
-              <TextField name='tag' label='Tags' showInlineError={true} placeholder={'Tag'}/>
               <NumField name='pHave' decimal={false} placeholder='Amount of People Already Have' label='People Already Have'/>
               <NumField name='maxWant' decimal={false} placeholder='Amount of People Needed' label='People Needed'/>
             </Form.Group>
