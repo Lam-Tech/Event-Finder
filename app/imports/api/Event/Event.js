@@ -17,6 +17,8 @@ class EventCollection {
       'members.$': {
         type: String,
       },
+      tag: { label: 'tag', type: Array, optional: true },
+      'tag.$': { type: String },
       title: { label: 'Event', type: String },
       statusType: {
         type: String,

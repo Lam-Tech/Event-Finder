@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Header } from 'semantic-ui-react';
+import { Card, Header, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { _ } from 'meteor/underscore';
 import { Link, withRouter } from 'react-router-dom';
 
 class CreatedEventsCard extends React.Component {
@@ -11,20 +12,21 @@ class CreatedEventsCard extends React.Component {
           <Card.Header>{this.props.event.title}</Card.Header>
           <Card.Meta>
             <span className='date'>{new Intl.DateTimeFormat('en-US', {
-              dateStyle: 'full', timeStyle: 'long',
-            }).format(this.props.event.date)}</span>
-            <span>{this.props.event.statusType}</span>
+              dateStyle: 'full', timeStyle: 'short' }).format(this.props.event.date)}</span>
           </Card.Meta>
           <Card.Description>
-            <Header as='h5'>Location</Header>
-            {this.props.event.location}
+            <Header as='h5'>Location: <span>{this.props.event.location}</span></Header>
             <Header as='h5'>Info</Header>
-            {this.props.event.information}
+            <span>{this.props.event.information}</span>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
+          <Header as='h5'>Tags{_.map(this.props.event.members,
+            (event, index) => <Label key={index} size='tiny' color='black'>{event}</Label>)}</Header>
+        </Card.Content>
+        <Card.Content extra>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
-            <Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link></Header>
+            <span className='statues'>{this.props.event.statusType}</span><Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link></Header>
         </Card.Content>
       </Card>
     );
@@ -36,6 +38,7 @@ CreatedEventsCard.propTypes = {
     _id: PropTypes.string,
     owner: PropTypes.string,
     members: PropTypes.array,
+    tag: PropTypes.array,
     title: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     location: PropTypes.string,

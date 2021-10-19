@@ -25,8 +25,8 @@ class AddEvent extends React.Component {
   }
 
   submit(data) {
-    const { owner, members, title, date, location, information, statusType, pHave, maxWant } = data;
-    Event.collection.insert({ owner, members, title, date, location, information, statusType, pHave, maxWant },
+    const { owner, members, tag, title, date, location, information, statusType, pHave, maxWant } = data;
+    Event.collection.insert({ owner, members, tag, title, date, location, information, statusType, pHave, maxWant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -53,6 +53,7 @@ class AddEvent extends React.Component {
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
+              <TextField name='tag' label='Tags' showInlineError={true} placeholder={'Tag'}/>
               <NumField name='pHave' decimal={false} placeholder='Amount of People Already Have' label='People Already Have'/>
               <NumField name='maxWant' decimal={false} placeholder='Amount of People Needed' label='People Needed'/>
             </Form.Group>

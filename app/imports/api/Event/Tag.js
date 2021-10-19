@@ -8,7 +8,7 @@ class TagCollection {
     this.collection = new Mongo.Collection(this.name);
 
     this.schema = new SimpleSchema({
-      Tag: { type: String, index: true, unique: true },
+      tag: { type: String, index: true, unique: true },
     }, { tracker: Tracker });
     this.collection.attachSchema(this.schema);
     this.userPublicationName = `${this.name}.publication.user`;

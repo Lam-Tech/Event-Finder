@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
+import swal from 'sweetalert';
 import { Event } from '../../api/Event/Event';
 import EventsCard from '../components/EventsCard';
 
@@ -17,11 +18,16 @@ class Events extends React.Component {
     };
   }
 
+  handleClick() {
+    this.setState((prevState) => ({ active: !prevState.active }));
+  }
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
+    const { active } = this.state;
     const currentUser = Meteor.user().username;
     let ownEvents = this.props.event;
     ownEvents = _.reject(ownEvents, function (events) { return events.owner === currentUser; });
@@ -32,6 +38,9 @@ class Events extends React.Component {
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
           <Button as={NavLink} exact to="/addevents" color='Yellow'>Create Event</Button>
+          <Button toggle active={active} onClick={this.handleClick}>
+            Online
+          </Button>
         </Container>
         <br/>
         <CardGroup>
