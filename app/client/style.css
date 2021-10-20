@@ -6,24 +6,25 @@
 
 .buttonTo {
   position:absolute;
-  left:205px;
+  left:195px;
   bottom: 3px;
 }
 
 .joinButton {
   position:absolute;
-  left:230px;
+  left:205px;
   bottom: 3px;
 }
 
 .editButton {
   position:absolute;
-  left:230px;
+  left:210px;
 }
 .statues {
-  bottom: 10px;
+  bottom: 8px;
   position:absolute;
-  left:150px;
+  left:140px;
+  font-size: 10px;
 }
 
 .pageStyle {
@@ -32,6 +33,19 @@
 
 .trashCan {
   position:absolute;
-  left:265px;
+  left:245px;
   bottom: 14px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.create {
+  margin-top: 50px;
+}
+
+.fontSize {
+  margin-top: 250px;
+  size: 100px;
 }

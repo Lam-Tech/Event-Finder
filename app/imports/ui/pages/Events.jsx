@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Header, Button, CardGroup, Input, Dropdown } from 'semantic-ui-react';
+import { Container, Loader, Header, Button, CardGroup, Input, Dropdown, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -63,7 +63,7 @@ class Events extends React.Component {
       otherEvents = _.filter(otherEvents, function (events) {
         return _.find(search, function (searches) {
           const tags = events.tag;
-          return _.contains(tags, searches.toUpperCase());
+          return _.contains(tags, searches.toLowerCase());
         });
       });
     }
@@ -71,17 +71,18 @@ class Events extends React.Component {
       <Container className='pageStyle'>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Input icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onChange}/>
-          <Dropdown
+          <Input fluid icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onChange}/> <Dropdown
             selection
             options={sortOptions}
+            defaultValue={sortOptions[0].value}
             value={value}
             onChange={this.onSort}
           />
-          <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
+          <br/><br/>
+          <Button classname='create' icon as={NavLink} exact to="/addevents" color='green'><Icon name='plus'/>Create Event</Button>
         </Container>
         <br/>
-        <CardGroup>
+        <CardGroup itemsPerRow={4}>
           {otherEvents.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
         <br/><br/><br/><br/>

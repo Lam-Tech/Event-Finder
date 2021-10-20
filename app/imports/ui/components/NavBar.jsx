@@ -3,23 +3,25 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Header, Icon, Menu } from 'semantic-ui-react';
+import { Button, Header, Icon, Menu } from 'semantic-ui-react';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
+    const menuStyle = { marginBottom: '250px' };
     return (
       <Menu className='home' secondary borderless fluid>
         {/* eslint-disable-next-line no-undef */}
         {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
-          <Menu.Item as={NavLink} activeClassName="" exact to="/home">
-            <Header as='h3'>Event Finder<Icon name='search'/></Header>
-          </Menu.Item>
+          [
+            // eslint-disable-next-line react/jsx-key
+            <Menu.Item position="left "as={NavLink} activeClassName="" exact to="/home"><Header as='h3'>Event Finder<Icon name='search'/></Header></Menu.Item>,
+            // eslint-disable-next-line react/jsx-key
+            <Menu.Item position="right"><span><Button size={'tiny'} as={NavLink} activeClassName="" exact to="/signout" color='red' inverted>Sign Out</Button></span></Menu.Item>,
+          ]
         ) : ''}
         {this.props.currentUser === '' ? (
-          <Menu.Item as={NavLink} activeClassName="" exact to="/">
-            <Header as='h3'>Event Finder<Icon name='search'/></Header>
-          </Menu.Item>
+          <Menu.Item style={menuStyle} as={NavLink} activeClassName="" exact to="/"><Header as='h3'>Event Finder<Icon name='search'/></Header></Menu.Item>
         ) : ''
         }
       </Menu>

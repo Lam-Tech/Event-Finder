@@ -54,7 +54,7 @@ class JoinedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra centered>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
-            <span className='statues'>{this.props.event.statusType}</span><Button className='buttonTo' basic size='tiny' onClick={this.handleClick} color='red'>Opt-Out</Button></Header>
+            <span className='statues'>{this.props.event.statusType}</span><Button className='buttonTo' basic size='tiny' onClick={this.handleClick} color='red'>Leave</Button></Header>
         </Card.Content>
       </Card>
     );

@@ -27,9 +27,9 @@ class CurrentUserEvents extends React.Component {
     return (
       <div>
         <Container className='pageStyle'>
-          <Button as={NavLink} exact to="/currentuserevents" >Created Events</Button><Button as={NavLink} exact to="/joinedevents">Joined Events</Button>
+          <Button color='green' inverted as={NavLink} exact to="/currentuserevents" >Created Events</Button><Button color='green' inverted as={NavLink} exact to="/joinedevents">Joined Events</Button>
           <br/><br/>
-          <CardGroup>
+          <CardGroup itemsPerRow={4}>
             {ownEvents.map((events) => <CreatedEventsCard key={events._id} event={events} />)}
           </CardGroup>
           <br/><br/><br/><br/>
