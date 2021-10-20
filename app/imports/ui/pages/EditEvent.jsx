@@ -88,9 +88,8 @@ export default withTracker(({ match }) => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document
-  const doc = Event.collection.findOne(documentId);
   return {
-    doc,
+    doc: Event.collection.findOne(documentId),
     ready,
   };
 })(EditEvent);
