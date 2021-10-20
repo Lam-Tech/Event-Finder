@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
-import { Tag } from '../../api/Event/Tag';
+import { Event } from '../../api/Event/Event';
 
 /* eslint-disable no-console */
 
@@ -10,9 +10,9 @@ function addData(data) {
   Stuffs.collection.insert(data);
 }
 
-function addTag(tag) {
-  console.log(`  Adding: ${tag.tag} `);
-  Tag.collection.insert(tag);
+function addEvent(event) {
+  console.log(`  Adding: ${event.title} `);
+  Event.collection.insert(event);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -23,9 +23,9 @@ if (Stuffs.collection.find().count() === 0) {
   }
 }
 
-if (Tag.collection.find().count() === 0) {
+if (Event.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
-    console.log('Creating default tags.');
-    Meteor.settings.defaultHobbies.map(tag => addTag(tag));
+    console.log('Creating default event.');
+    Meteor.settings.defaultEvents.map(event => addEvent(event));
   }
 }
