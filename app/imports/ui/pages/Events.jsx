@@ -37,19 +37,20 @@ class Events extends React.Component {
     otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; });
     otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
     otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
-    // eslint-disable-next-line max-len
-    const foundEvents = _.filter(otherEvents, function (events) {
-      return _.find(events.tag, function (tags) {
-        return _.find(search, function (searches) {
-          return tags.toLowerCase().indexOf(searches.toLowerCase()) !== -1;
+    if (search.length > 1) {
+      otherEvents = _.filter(otherEvents, function (events) {
+        return _.find(search, function (searchs) {
+          const tags = events.tag;
+          _.each(tags, function (lowerTag) { lowerTag.toLowerCase(); });
+          return _.contains(tags, searchs.toLowerCase());
         });
       });
-    });
+    }
     return (
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Input icon="search" placeholder="Search events by tag..." onChange={this.onchange}/>
+          <Input icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onchange}/>
           <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
           <Button toggle active={active} onClick={this.handleClick}>
             Online
@@ -57,7 +58,7 @@ class Events extends React.Component {
         </Container>
         <br/>
         <CardGroup>
-          {foundEvents.map((events) => <EventsCard key={events._id} event={events} />)}
+          {otherEvents.map((events) => <EventsCard key={events._id} event={events} />)}
         </CardGroup>
         <br/><br/><br/><br/>
       </Container>
