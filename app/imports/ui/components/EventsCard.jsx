@@ -22,6 +22,13 @@ class EventsCard extends React.Component {
       swal('Success', 'Joined event successfully', 'success')));
   }
 
+  color(member) {
+    if (member === this.props.event.owner) {
+      return 'yellow';
+    }
+    return 'green';
+  }
+
   render() {
     return (
       <Card color='green'>
@@ -43,7 +50,7 @@ class EventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header as='h5'>Members{_.map(this.props.event.members,
-            (member, index) => <Label key={index} size='tiny' color='black'>{member}</Label>)}</Header>
+            (member, index) => <Label key={index} size='tiny' color={this.color(member)}>{member}</Label>)}</Header>
         </Card.Content>
         <Card.Content extra>
           <Header className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}

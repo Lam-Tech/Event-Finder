@@ -11,6 +11,13 @@ class CreatedEventsCard extends React.Component {
     Event.collection.remove(id);
   }
 
+  color(member) {
+    if (member === this.props.event.owner) {
+      return 'yellow';
+    }
+    return 'green';
+  }
+
   render() {
     return (
       <Card color='red'>
@@ -32,11 +39,10 @@ class CreatedEventsCard extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Header as='h5'>Members{_.map(this.props.event.members,
-            (member, index) => <Label key={index} size='tiny' color='black'>{member}</Label>)}</Header>
+            (member, index) => <Label key={index} size='tiny' color={this.color(member)}>{member}</Label>)}</Header>
         </Card.Content>
         <Card.Content extra>
           <span className='numberPeople' as='h5'>{this.props.event.pHave + (this.props.event.members.length - 1)}/{this.props.event.maxWant + this.props.event.pHave}
-            {/* eslint-disable-next-line max-len */}
             <span className='statues'>{this.props.event.statusType}</span>
             <Link className='editButton' to={`/editevents/${this.props.event._id}`}>Edit</Link><Icon className='trashCan' size='small' color='red' onClick={() => this.handleClick(this.props.event._id)} name='trash'/></span>
         </Card.Content>
