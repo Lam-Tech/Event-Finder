@@ -53,9 +53,9 @@ class Events extends React.Component {
     const { search } = this.state;
     const currentUser = Meteor.user().username;
     let otherEvents = this.props.event;
-    otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; });
-    otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
-    otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
+    otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; }); // filter out event created by you
+    otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); }); // filter out event you join
+    otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); }); /// filter out event that is full
     if (value !== 'Online/Offline') {
       otherEvents = _.reject(otherEvents, function (events) { return events.statusType !== value; });
     }

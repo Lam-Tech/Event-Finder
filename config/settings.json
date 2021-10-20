@@ -1,7 +1,7 @@
 {
   "galaxy.meteor.com": {
     "env": {
-      "MONGO_URL": "mongodb+srv://admin:apple321@cluster0.0fwib.mongodb.net/covidcheck?retryWrites=true&w=majority"
+      "MONGO_URL": "mongodb+srv://admin:apple321@cluster0.0fwib.mongodb.net/eventfinder?retryWrites=true&w=majority"
     }
   },
   "defaultAccounts": [
