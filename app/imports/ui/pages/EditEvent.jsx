@@ -2,6 +2,7 @@ import React from 'react';
 import { Loader, Segment, Form, Container } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import {
+  AutoField,
   AutoForm,
   DateField,
   ErrorsField,
@@ -56,6 +57,7 @@ class EditEvent extends React.Component {
             </Form.Group>
             <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
             <Form.Group widths='equal'>
+              <AutoField name='tag'/>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
               <NumField name='pHave' decimal={false} placeholder='# People it have' label='# People'/>
               <NumField name='maxWant' decimal={false} placeholder='People Needed' label='People Needed'/>
