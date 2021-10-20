@@ -1,7 +1,17 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com","username": "Admin", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com","username": "John", "password": "changeme" }
+    { "email": "admin@foo.com", "username": "Admin", "password": "changeme", "role": "admin" },
+    { "email": "john@foo.com", "username": "John", "password": "changeme"},
+    { "email": "sj64@hawaii.edu", "username": "Shengtong", "password": "changeme"},
+    { "email": "yiwencc@hawaii.edu", "username": "Yiwen", "password": "changeme"},
+    { "email": "austin@hawaii.edu", "username": "Austin", "password": "changeme"},
+    { "email": "zay@hawaii.edu", "username": "Zay", "password": "changeme"},
+    { "email": "ray@hawaii.edu", "username": "Ray", "password": "changeme"},
+    { "email": "dinana@hawaii.edu", "username": "Dinana", "password": "changeme"},
+    { "email": "vex@hawaii.edu", "username": "Vex", "password": "changeme"},
+    { "email": "leo@hawaii.edu", "username": "Leo", "password": "changeme"},
+    { "email": "teemo@hawaii.edu", "username": "Temmo", "password": "changeme"},
+    { "email": "leona@hawaii.edu", "username": "Leona", "password": "changeme"}
   ],
 
   "defaultData": [
@@ -12,8 +22,7 @@
   ],
 
   "defaultEvents": [
-    {}
-
+    { "_id" : "8uHe7e3GBSrazMX5A", "owner" : "John", "members" : [ "John" ], "tag" : [ "League of Legends", "Video games" ], "title" : "League of Legends Clash", "date" : "2021-10-30T14:45:00Z", "location" : "Online", "information" : "Join us for the League of Legends clash competition! We are currently looking for Top, jungle, and adc players, the minimum rank requirement is gold.", "statusType" : "Online", "pHave" : 2, "maxWant" : 3 }
   ]
 
 }
