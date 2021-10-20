@@ -23,6 +23,7 @@
 
   "defaultEvents": [
     { "_id" : "8uHe7e3GBSrazMX5A", "owner" : "John", "members" : [ "John" ], "tag" : [ "League of Legends", "Video games" ], "title" : "League of Legends Clash", "date" : "2021-10-30T14:45:00Z", "location" : "Online", "information" : "Join us for the League of Legends clash competition! We are currently looking for Top, jungle, and adc players, the minimum rank requirement is gold.", "statusType" : "Online", "pHave" : 2, "maxWant" : 3 }
+
   ]
 
 }
