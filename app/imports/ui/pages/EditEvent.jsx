@@ -29,9 +29,8 @@ class EditEvent extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { owner, title, date, location, information, pHave, maxWant } = data;
-    const _id = Event.collection.findOne({ owner })._id;
-    Event.collection.update(_id, { $set: { owner, title, date, location, information, pHave, maxWant } }, (error) => (error ?
+    const { owner, title, date, location, information, tag, pHave, maxWant, _id } = data;
+    Event.collection.update(_id, { $set: { owner, title, date, location, information, tag, pHave, maxWant } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Event updated successfully', 'success')));
     this.setState({ redirectToReferer: true });
@@ -86,10 +85,9 @@ export default withTracker(({ match }) => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Event.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
   // Get the document
   return {
     doc: Event.collection.findOne(documentId),
-    ready,
+    ready: subscription.ready(),
   };
 })(EditEvent);

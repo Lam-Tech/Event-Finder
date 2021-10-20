@@ -31,7 +31,7 @@ class App extends React.Component {
             <ProtectedRoute path="/home" component={Home}/>
             <ProtectedRoute path="/events" component={Events}/>
             <ProtectedRoute path="/addevents" component={AddEvent}/>
-            <ProtectedRoute path="/editevents" component={EditEvent}/>
+            <ProtectedRoute path="/editevents/:_id" component={EditEvent}/>
             <ProtectedRoute path="/currentuserevents" component={CurrentUserEvents}/>
             <ProtectedRoute path="/joinedevents" component={JoinedEvent}/>
             <ProtectedRoute path="/profile" component={Profile}/>
