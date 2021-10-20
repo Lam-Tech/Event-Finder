@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Segment, Form, Loader } from 'semantic-ui-react';
+import { Container, Segment, Form, Loader, Button, Header } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -14,7 +14,7 @@ import {
   TextField, HiddenField,
   SelectField,
 } from 'uniforms-semantic';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Event } from '../../api/Event/Event';
 
@@ -45,11 +45,13 @@ class AddEvent extends React.Component {
   }
 
   renderPage() {
+    const menuStyle = { marginTop: '100px' };
     if (this.state.redirectToReferer) {
       return <Redirect to='/events'/>;
     }
     return (
-      <Container>
+      <Container style={menuStyle} textAlign='center'>
+        <Header as='h1'>Creating Event</Header>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <Form.Group widths={'equal'}>
@@ -57,14 +59,17 @@ class AddEvent extends React.Component {
               <DateField name='date' placeholder='MM/DD/YYYY' label='Date'/>
               <TextField name='location' placeholder='Address' label='Location'/>
             </Form.Group>
-            <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
+            <Form.Group widths={'equal'}>
+              <LongTextField name='information' placeholder='Extra info people need to know to join' label='Info'/>
+              <AutoField name='tag' label='Tag'/>
+            </Form.Group>
             <Form.Group widths='equal'>
-              <AutoField name='tag'/>
               <SelectField name = "statusType" label='Status Type' placeholder='Online / Offline'/>
               <NumField name='pHave' decimal={false} placeholder='Amount of People Already Have' label='People Already Have'/>
               <NumField name='maxWant' decimal={false} placeholder='Amount of People Needed' label='People Needed'/>
             </Form.Group>
-            <SubmitField value='Create'/>
+            <SubmitField color='green' value='Create'/>
+            <Button color='red' as={NavLink} exact to="/events">Cancel</Button>
             <ErrorsField/>
             <HiddenField name='owner' value={Meteor.user().username}/>
             <HiddenField name='members' value={[Meteor.user().username]}/>

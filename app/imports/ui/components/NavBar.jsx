@@ -8,7 +8,7 @@ import { Button, Header, Icon, Menu } from 'semantic-ui-react';
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '250px' };
+    const menuStyle = { marginBottom: '200px' };
     return (
       <Menu className='home' secondary borderless fluid>
         {/* eslint-disable-next-line no-undef */}
