@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Header, Label, Button, Icon } from 'semantic-ui-react';
+import { Card, Header, Label, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Link, withRouter } from 'react-router-dom';

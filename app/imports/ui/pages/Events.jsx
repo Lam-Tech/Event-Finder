@@ -14,12 +14,13 @@ class Events extends React.Component {
     super(props);
     this.state = {
       prompt: false,
-      search: '',
+      search: [],
     };
   }
 
   onchange = e => {
-    this.setState({ search: e.target.value });
+    this.setState({ search: e.target.value.split(/[ ,]+/) });
+    console.log(this.state);
   }
 
   handleClick = () => this.setState((prevState) => ({ active: !prevState.active }))
@@ -36,7 +37,14 @@ class Events extends React.Component {
     otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; });
     otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
     otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
-    const foundEvents = _.filter(otherEvents, function (events) { return _.find(events.tag, function (tag) { return tag.toLowerCase().indexOf(search.toLowerCase()) !== -1; }); });
+    // eslint-disable-next-line max-len
+    const foundEvents = _.filter(otherEvents, function (events) {
+      return _.find(events.tag, function (tags) {
+        return _.find(search, function (searches) {
+          return tags.toLowerCase().indexOf(searches.toLowerCase()) !== -1;
+        });
+      });
+    });
     return (
       <Container>
         <Container fluid textAlign='center'>
