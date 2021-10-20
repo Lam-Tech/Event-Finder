@@ -69,7 +69,7 @@ class Events extends React.Component {
       });
     }
     return (
-      <Container>
+      <Container className='pageStyle'>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
           <Input icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onChange}/>

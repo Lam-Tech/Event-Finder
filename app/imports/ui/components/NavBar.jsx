@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Header, Icon, Menu } from 'semantic-ui-react';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '150px' };
     return (
-      <Menu className='home' secondary style={menuStyle} borderless fluid widths={1}>
+      <Menu className='home' secondary borderless fluid>
         {/* eslint-disable-next-line no-undef */}
         {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
           <Menu.Item as={NavLink} activeClassName="" exact to="/home">
-            Event Finder
+            <Header as='h3'>Event Finder<Icon name='search'/></Header>
           </Menu.Item>
         ) : ''}
         {this.props.currentUser === '' ? (
           <Menu.Item as={NavLink} activeClassName="" exact to="/">
-            Event Finder
+            <Header as='h3'>Event Finder<Icon name='search'/></Header>
           </Menu.Item>
         ) : ''
         }
