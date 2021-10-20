@@ -24,9 +24,9 @@ class EventsCard extends React.Component {
 
   color(member) {
     if (member === this.props.event.owner) {
-      return 'yellow';
+      return 'green';
     }
-    return 'green';
+    return 'teal';
   }
 
   render() {
