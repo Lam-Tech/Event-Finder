@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Loader, Header, Button, CardGroup, Input } from 'semantic-ui-react';
+import { Container, Loader, Header, Button, CardGroup, Input, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -14,29 +14,51 @@ class Events extends React.Component {
     super(props);
     this.state = {
       prompt: false,
+      value: 'Online/Offline',
       search: [],
     };
   }
 
-  onchange = e => {
+  onChange = e => {
     this.setState({ search: e.target.value.split(/[ ,]+/) });
     console.log(this.state);
   }
 
-  handleClick = () => this.setState((prevState) => ({ active: !prevState.active }))
+  onSort = (e, { value }) => this.setState({ value })
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
-    const { active } = this.state;
+    const sortOptions = [
+      {
+        key: 'Online/Offline',
+        text: 'Online/Offline',
+        value: 'Online/Offline',
+      },
+      {
+        key: 'Online',
+        text: 'Online',
+        value: 'Online',
+      },
+      {
+        key: 'Offline',
+        text: 'Offline',
+        value: 'Offline',
+      },
+    ];
+
+    const { value } = this.state;
     const { search } = this.state;
     const currentUser = Meteor.user().username;
     let otherEvents = this.props.event;
     otherEvents = _.reject(otherEvents, function (events) { return events.owner === currentUser; });
     otherEvents = _.reject(otherEvents, function (events) { return _.find(events.members, function (member) { return member === currentUser; }); });
     otherEvents = _.reject(otherEvents, function (events) { return (events.pHave + (events.members.length - 1)) >= (events.maxWant + events.pHave); });
+    if (value !== 'Online/Offline') {
+      otherEvents = _.reject(otherEvents, function (events) { return events.statusType !== value; });
+    }
     if (search.length > 1) {
       otherEvents = _.filter(otherEvents, function (events) {
         return _.find(search, function (searchs) {
@@ -50,11 +72,15 @@ class Events extends React.Component {
       <Container>
         <Container fluid textAlign='center'>
           <Header as="h1" textAlign="center">Events</Header>
-          <Input icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onchange}/>
+          <Input icon="search" placeholder="Search events by tags seperated by space or comma..." onChange={this.onChange}/>
+          <Dropdown
+            selection
+            options={sortOptions}
+            defaultValue={sortOptions[0].value}
+            value={value}
+            onChange={this.onSort}
+          />
           <Button as={NavLink} exact to="/addevents" color='green'>Create Event</Button>
-          <Button toggle active={active} onClick={this.handleClick}>
-            Online
-          </Button>
         </Container>
         <br/>
         <CardGroup>
