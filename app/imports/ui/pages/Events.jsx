@@ -63,7 +63,7 @@ class Events extends React.Component {
       otherEvents = _.filter(otherEvents, function (events) {
         return _.find(search, function (searches) {
           const tags = events.tag;
-          return _.contains(tags, searches.toLowerCase());
+          return _.contains(tags, searches.toUpperCase());
         });
       });
     }
