@@ -18,7 +18,15 @@ class EventCollection {
         type: String,
       },
       tag: { label: 'tag', type: Array, optional: true },
-      'tag.$': { type: String },
+      'tag.$': { type: String,
+        // eslint-disable-next-line consistent-return
+        autoValue: function () {
+          if (this.isSet && typeof this.value === 'string') {
+            const result = this.value.toUpperCase();
+            return result.split(' ').join('_');
+          }
+        },
+      },
       title: { label: 'Event', type: String },
       statusType: {
         type: String,

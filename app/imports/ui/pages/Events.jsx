@@ -61,10 +61,9 @@ class Events extends React.Component {
     }
     if (search.length > 1) {
       otherEvents = _.filter(otherEvents, function (events) {
-        return _.find(search, function (searchs) {
+        return _.find(search, function (searches) {
           const tags = events.tag;
-          _.each(tags, function (lowerTag) { lowerTag.toLowerCase(); });
-          return _.contains(tags, searchs.toLowerCase());
+          return _.contains(tags, searches.toLowerCase());
         });
       });
     }
@@ -76,7 +75,6 @@ class Events extends React.Component {
           <Dropdown
             selection
             options={sortOptions}
-            defaultValue={sortOptions[0].value}
             value={value}
             onChange={this.onSort}
           />
