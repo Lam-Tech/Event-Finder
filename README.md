@@ -45,7 +45,8 @@ This application is currently deployed in [Galaxy](https://eventfinder.meteorapp
 
 ### The Team
 This application was developed as part of [Meteor Hackaton 2021](https://impact.meteor.com/hackathon).
+
 The team member included:
-    *[Chakhon Lam](https://github.com/chakhon)
-    *[Yiwen Chen](https://github.com/yiwenc22)
-    *[Shengtong Jin](https://github.com/ShengT-Jin)
+* [Chakhon Lam](https://github.com/chakhon)
+* [Yiwen Chen](https://github.com/yiwenc22)
+* [Shengtong Jin](https://github.com/ShengT-Jin)
