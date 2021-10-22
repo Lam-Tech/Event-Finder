@@ -8,4 +8,4 @@ In Event Finder, user will be able to create and join different event. Each even
 
 #### Landing page
 Here is the landing page for Event Finder. User will be able to sign in or sign up from the two button in the middle of the page.
-
+<img class="image" src="https://github.com/Lam-Tech/Event-Finder/blob/master/doc/landingpg.png">
