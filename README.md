@@ -22,7 +22,7 @@ Here is a simple home page after user login. user can sign out thought the upper
 #### Event page
 Here is the event page, as we can see there is lots event card in the page, user will be able to check each event's information.
 If they wants to join the event, they can just simply click "Join" button. There is also a search bar for the event, user can type in the tag and the page will auto filter out the event that contain these tag. And there is filter where user can filter out online or offline event. Right under filter, there is create event button which will lead user to create event page.
-<img class="image" src="https://github.com/Lam-Tech/Event-Finder/blob/master/doc/eventpg.png">
+<img class="image" src="https://github.com/Lam-Tech/Event-Finder/blob/master/doc/eventpageg.png">
 
 #### Create Event page
 In this page, user need to enter the event title, date, time, location, detail(optional), tag, status type, number of people already have, and the number of people needs.
